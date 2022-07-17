@@ -4,11 +4,14 @@ from ..doctors.models import Doctor
 from .models import Appointment
 from .forms import AppointmentForm
 
-# Create your views here.
+
 def view_appointment(request):
     appointments = Appointment.objects.all()
     if not request.user.is_authenticated:
         return redirect('login')
+
+    if request.user.is_doctor:
+        appointments = Appointment.objects.all().filter(doctor__user = request.user)
     
     context = {'appointments': appointments}
     return render(request, 'appointment/view_appointment.html', context)
@@ -23,7 +26,7 @@ def add_appointment(request):
     if request.method == "POST":
         doctor_name = request.POST.get('doctor')
         patient_name = request.POST.get('patient')
-        doctor, created = Doctor.objects.get_or_create(name = doctor_name)
+        doctor, created = Doctor.objects.get_or_create(user__username = doctor_name)
         patient, created = Patient.objects.get_or_create(name = patient_name)
 
         Appointment.objects.create(

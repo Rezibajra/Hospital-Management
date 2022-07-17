@@ -15,16 +15,7 @@
       </li>
       {% endif %}
       
-      {% if request.user.is_authenticated %}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Doctor
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'view_doctor' %}">View Doctor</a>
-          <a class="dropdown-item" href="{% url 'add_doctor' %}">Add Doctor</a>
-        </div>
-      </li>
+      {% if request.user.is_authenticated and request.user.is_receptionist %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Patient
@@ -34,18 +25,25 @@
           <a class="dropdown-item" href="{% url 'add_patient' %}">Add Patient</a>
         </div>
       </li>
+      {% endif %}
+      {% if request.user.is_authenticated %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Appointment
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'view_appointment' %}">View Appointment</a>
-          <a class="dropdown-item" href="{% url 'add_appointment' %}">Add Appointment</a>
+          {% if request.user.is_receptionist %}
+            <a class="dropdown-item" href="{% url 'add_appointment' %}">Add Appointment</a>
+          {% endif %}
         </div>
       </li>
       {% endif %}
 
       {% if request.user.is_authenticated %}
+      <li class="nav-item mt-2">
+        <a class="text-white text-center">Logged in as {{ request.user }}</a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
       </li>

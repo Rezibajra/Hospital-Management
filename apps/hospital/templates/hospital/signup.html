@@ -1,0 +1,10 @@
+{% include 'base.html' %}
+{% include 'navbar.html' %}
+{% block content %}
+<div class="container mt-4">
+  <p class="lead">Select below the type of account you want to create</p>
+  <a href="{% url 'doctor_signup' %}" class="btn btn-info btn-lg" role="button">I'm a doctor</a>
+  <a href="{% url 'receptionist_signup' %}" class="btn btn-dark btn-lg" role="button">I'm a receptionist</a>
+</div>
+{% endblock content%}
+{% include 'footer.html' %}

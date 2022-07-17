@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 
+def signup_page(request):
+    return render(request, 'hospital/signup.html')
+
 def home(request):
     return render(request, 'hospital/home.html')
 
@@ -29,8 +32,6 @@ def login_page(request):
     return render(request, 'hospital/login.html')
 
 def logout_page(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
     logout(request)
     return redirect('login')
 

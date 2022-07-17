@@ -1,54 +1,19 @@
-from django.shortcuts import render, redirect
-from .models import Doctor
-from .forms import DoctorForm
+from django.shortcuts import redirect
+from django.contrib.auth import login
+from django.views.generic import CreateView
+from ..hospital.models import User
+from .forms import DoctorSignUpForm
 
-# Create your views here.
-def view_doctor(request):
-    doctors = Doctor.objects.all()
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    context = {'doctors': doctors}
-    return render(request, 'doctors/view_doctor.html', context)
+class DoctorSignUpView(CreateView):
+    model = User
+    form_class = DoctorSignUpForm
+    template_name = 'signup_form.html'
 
-def add_doctor(request):
-    form = DoctorForm()
-    if not request.user.is_authenticated:
-        return redirect('login')
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'doctor'
+        return super().get_context_data(**kwargs)
 
-    if request.method == "POST":
-        Doctor.objects.create(
-            name = request.POST.get('name'),
-            address = request.POST.get('address'),
-            speciality = request.POST.get('speciality'),
-        )
-        return redirect('view_doctor')
-    context = {'form': form}
-    return render(request, 'doctors/doctor_form.html', context)
-    
-def update_doctor(request, pk):
-    doctor = Doctor.objects.get(id=pk)
-    form = DoctorForm(instance=doctor)
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    if request.method == 'POST':
-        doctor.name = request.POST.get('name')
-        doctor.address = request.POST.get('address')
-        doctor.speciality = request.POST.get('speciality')
-        doctor.save()
-        return redirect('view_doctor')
-    context = {'form': form, 'doctor': doctor}
-    return render(request, 'doctors/doctor_form.html', context)
-
-def delete_doctor(request, pk):
-    doctor = Doctor.objects.get(id=pk)
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    if request.method == 'POST':
-        doctor.delete()
-        return redirect('view_doctor')
-
-    context = {'obj': doctor}
-    return render(request, 'hospital/delete.html', context)
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')

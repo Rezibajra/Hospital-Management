@@ -9,7 +9,7 @@
         <label>Doctor Name</label>
         <select name="doctor" class="form-control">
             {% for doctor in doctors %}
-                <option value="{{ doctor.name }}">{{doctor.name}}</option>
+                <option value="{{ doctor.user }}">{{doctor.user}}</option>
             {% endfor %}
         </select>
         <label>Patient Name</label>
@@ -26,7 +26,6 @@
         <label>Appointment Time</label>
         {{ form.time }}
         </div>
-        <!-- {{form.as_p}} -->
         <input type="submit" value="Submit" class="btn btn-primary"/>
 
     </form>

@@ -19,12 +19,12 @@
         <tbody>
             {% for doctor in doctors %}
             <tr>
-                <td>{{doctor.id}}</td>
-                <td>{{doctor.name}}</td>
+                <td>{{doctor.user.id}}</td>
+                <td>{{doctor.user}}</td>
                 <td>{{doctor.address}}</td>
                 <td>{{doctor.speciality}}</td>
-                <td><a href="{% url 'update_doctor' doctor.id %}" class="btn btn-success">Update</a></td>
-                <td><a href="{% url 'delete_doctor' doctor.id %}" class="btn btn-danger">Delete</a></td>
+                <td><a href="{% url 'update_doctor' doctor.user.id %}" class="btn btn-success">Update</a></td>
+                <td><a href="{% url 'delete_doctor' doctor.user.id %}" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}
         </tbody>

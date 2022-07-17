@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Patient
 from .forms import PatientForm
 
-# Create your views here.
+
 def view_patient(request):
     patients = Patient.objects.all()
     if not request.user.is_authenticated:

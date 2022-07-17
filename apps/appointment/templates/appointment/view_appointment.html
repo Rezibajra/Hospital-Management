@@ -13,18 +13,22 @@
                 <th>Patient</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Delete</th>
+                {% if request.user.is_receptionist %}
+                    <th>Delete</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
             {% for appointment in appointments %}
             <tr>
                 <td>{{appointment.id}}</td>
-                <td>{{appointment.doctor.name}}</td>
+                <td>{{appointment.doctor.user}}</td>
                 <td>{{appointment.patient.name}}</td>
                 <td>{{appointment.date}}</td>
                 <td>{{appointment.time}}</td>
-                <td><a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger">Delete</a></td>
+                {% if request.user.is_receptionist %}
+                    <td><a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger">Delete</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
