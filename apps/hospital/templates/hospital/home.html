@@ -1,0 +1,11 @@
+{% include 'base.html' %}
+{% load static %}
+{% include 'navbar.html' %}
+
+{% block content %}
+<div class="container">
+    <img src="{% static 'images/hospital.jpg' %}" class="img-responsive bg-img" alt="Hospital image">
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

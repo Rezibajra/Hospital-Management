@@ -1,0 +1,16 @@
+{% include 'base.html' %}
+{% include 'navbar.html' %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center">Add Patient</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+
+    </form>
+</div>
+{% endblock content %}
+
+{% include 'footer.html' %}

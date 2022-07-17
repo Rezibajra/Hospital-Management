@@ -1,0 +1,35 @@
+{% include 'base.html' %}
+{% load static %}
+{% include 'navbar.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>View Appointment</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Appointment Id</th>
+                <th>Doctor</th>
+                <th>Patient</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{appointment.id}}</td>
+                <td>{{appointment.doctor.name}}</td>
+                <td>{{appointment.patient.name}}</td>
+                <td>{{appointment.date}}</td>
+                <td>{{appointment.time}}</td>
+                <td><a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,30 @@
+{% include 'base.html' %}
+{% include 'navbar.html' %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center">Add Doctor</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <!-- <div>
+        <label>Name</label>
+        {{form.name}}
+        </div>
+
+        <div>
+        <label>Address</label>
+        {{form.address}}
+        </div>
+
+        <div>
+        <label>Speciality</label>
+        {{form.speciality}}
+        </div> -->
+        {{form.as_p}}
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+
+    </form>
+</div>
+{% endblock content %}
+
+{% include 'footer.html' %}
