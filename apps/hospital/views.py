@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
 
 def signup_page(request):
     return render(request, 'hospital/signup.html')

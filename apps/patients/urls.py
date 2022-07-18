@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import view_patient, add_patient, update_patient, delete_patient
 
-
 urlpatterns = [
     path('view_patient/', view_patient, name='view_patient'),
     path('add_patient/', add_patient, name='add_patient'),
