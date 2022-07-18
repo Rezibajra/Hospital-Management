@@ -18,10 +18,6 @@ def login_page(request):
     if request.method == "POST":
         name = request.POST.get('name')
         password = request.POST.get('password')
-        try:
-            user = User.objects.get(username = name)
-        except:
-            messages.error(request, "User doesn't exist.")
         user = authenticate(request, username=name, password=password)
 
         if user is not None:

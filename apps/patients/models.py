@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Patient(models.Model):
     GENDER_CHOICES = (
         ("Male", "Male"),

@@ -3,13 +3,13 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-8 col-sm-10 col-12 ml-3">
+    <div class="col-md-8 col-sm-10 col-12 ml-1">
       <h2>Sign up as a {{ user_type }}</h2>
       <form method="post" novalidate>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Sign up</button>
+        <button type="submit" class="btn btn-success mb-3">Sign up</button>
       </form>
     </div>
   </div>
