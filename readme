@@ -1,0 +1,17 @@
+Admin username and password
+- admin
+- admin
+
+Register as doctor or receptionist through "Don't have an account? Signup." 
+- Sign up with details.
+- Use the credentials to login next time.
+
+Doctor
+- Login
+- Can view only the appointments assigned to them by receptionists.
+
+Receptionist
+- Login
+- CRUD on patient's data
+- Add, delete, view appointments(Schedule Appointments).
+

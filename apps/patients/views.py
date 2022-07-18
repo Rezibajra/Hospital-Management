@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Patient
 from .forms import PatientForm
+from ..receptionist.decorators import receptionist_required
 
-
+@receptionist_required
 def view_patient(request):
     patients = Patient.objects.all()
     if not request.user.is_authenticated:
@@ -11,6 +12,7 @@ def view_patient(request):
     context = {'patients': patients}
     return render(request, 'patients/view_patient.html', context)
 
+@receptionist_required
 def add_patient(request):
     form = PatientForm()
     if not request.user.is_authenticated:
@@ -25,7 +27,8 @@ def add_patient(request):
         return redirect('view_patient')
     context = {'form': form}
     return render(request, 'patients/patient_form.html', context)
-    
+
+@receptionist_required  
 def update_patient(request, pk):
     patient = Patient.objects.get(id=pk)
     form = PatientForm(instance=patient)
@@ -41,6 +44,7 @@ def update_patient(request, pk):
     context = {'form': form, 'patient': patient}
     return render(request, 'patients/patient_form.html', context)
 
+@receptionist_required
 def delete_patient(request, pk):
     patient = Patient.objects.get(id=pk)
     if not request.user.is_authenticated:

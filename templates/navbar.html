@@ -15,7 +15,7 @@
       </li>
       {% endif %}
       
-      {% if request.user.is_authenticated and request.user.is_receptionist %}
+      {% if request.user.is_staff or request.user.is_receptionist %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Patient
@@ -33,7 +33,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'view_appointment' %}">View Appointment</a>
-          {% if request.user.is_receptionist %}
+          {% if request.user.is_staff or request.user.is_receptionist %}
             <a class="dropdown-item" href="{% url 'add_appointment' %}">Add Appointment</a>
           {% endif %}
         </div>

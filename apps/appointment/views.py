@@ -3,7 +3,7 @@ from ..patients.models import Patient
 from ..doctors.models import Doctor
 from .models import Appointment
 from .forms import AppointmentForm
-
+from ..receptionist.decorators import receptionist_required
 
 def view_appointment(request):
     appointments = Appointment.objects.all()
@@ -16,6 +16,7 @@ def view_appointment(request):
     context = {'appointments': appointments}
     return render(request, 'appointment/view_appointment.html', context)
 
+@receptionist_required
 def add_appointment(request):
     patients = Patient.objects.all()
     doctors = Doctor.objects.all()
@@ -39,6 +40,7 @@ def add_appointment(request):
     context = {'form': form, 'doctors': doctors, 'patients': patients}
     return render(request, 'appointment/appointment_form.html', context)
     
+@receptionist_required
 def delete_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     if not request.user.is_authenticated:

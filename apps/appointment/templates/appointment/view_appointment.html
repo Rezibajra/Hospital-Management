@@ -13,7 +13,7 @@
                 <th>Patient</th>
                 <th>Date</th>
                 <th>Time</th>
-                {% if request.user.is_receptionist %}
+                {% if request.user.is_staff or request.user.is_receptionist %}
                     <th>Delete</th>
                 {% endif %}
             </tr>
@@ -26,7 +26,7 @@
                 <td>{{appointment.patient.name}}</td>
                 <td>{{appointment.date}}</td>
                 <td>{{appointment.time}}</td>
-                {% if request.user.is_receptionist %}
+                {% if request.user.is_staff or request.user.is_receptionist %}
                     <td><a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger">Delete</a></td>
                 {% endif %}
             </tr>

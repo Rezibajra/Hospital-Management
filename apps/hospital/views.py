@@ -11,7 +11,7 @@ def home(request):
     return render(request, 'hospital/home.html')
 
 def login_page(request):
-
+    
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -33,6 +33,6 @@ def login_page(request):
 
 def logout_page(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 
